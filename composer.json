@@ -1,0 +1,73 @@
+{
+    "name": "jeffersongoncalves/laravel-lgpd-records",
+    "description": "LGPD records of processing activities (ROPA) for Laravel: purposes, legal bases, recipients and international transfers, joined with the personal data inventory, plus the data protection officer's public contact.",
+    "keywords": [
+        "laravel",
+        "lgpd",
+        "ropa",
+        "records-of-processing",
+        "dpo",
+        "encarregado",
+        "privacy",
+        "anpd",
+        "gdpr"
+    ],
+    "homepage": "https://github.com/jeffersongoncalves/laravel-lgpd-records",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jefferson Gonçalves",
+            "email": "gerson.simao.92@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "spatie/laravel-package-tools": "^1.16",
+        "illuminate/contracts": "^12.0|^13.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JeffersonGoncalves\\LgpdRecords\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JeffersonGoncalves\\LgpdRecords\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "analyse": "vendor/bin/phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JeffersonGoncalves\\LgpdRecords\\LgpdRecordsServiceProvider"
+            ],
+            "aliases": {
+                "LgpdRecords": "JeffersonGoncalves\\LgpdRecords\\Facades\\LgpdRecords"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
