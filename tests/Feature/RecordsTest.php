@@ -56,6 +56,31 @@ it('warns when the DPO contact is missing', function () {
     expect(Artisan::output())->toContain('No data protection officer contact');
 });
 
+it('renders the privacy policy from the records', function () {
+    billing();
+
+    $html = Blade::render('<x-lgpd-records::privacy-policy rights-url="/privacy/requests" />');
+
+    expect($html)->toContain('Acme Ltda is the controller')
+        ->toContain('Billing')
+        ->toContain('Performance of a contract (art. 7, V)')
+        ->toContain('email, tax id')
+        ->toContain('Stripe (processor)')
+        ->toContain('US (standard contractual clauses)')
+        ->toContain('5 years')
+        ->toContain('Revocation of your consent')
+        ->toContain('href="/privacy/requests"')
+        ->toContain('mailto:dpo@acme.test');
+
+    app()->setLocale('pt_BR');
+
+    expect(Blade::render('<x-lgpd-records::privacy-policy />'))
+        ->toContain('Política de privacidade')
+        ->toContain('Execução de contrato (art. 7º, V)')
+        ->toContain('Stripe (operador)')
+        ->toContain('fale com o nosso encarregado');
+});
+
 it('renders the public DPO contact', function () {
     $html = Blade::render('<x-lgpd-records::dpo class="footer" />');
 
