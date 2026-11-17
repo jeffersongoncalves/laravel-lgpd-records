@@ -71,6 +71,21 @@ Publish the *encarregado*'s identity and contact on your website (art. 41, §1):
 
 It renders the name, a `mailto:` link and a `tel:` link, and renders nothing until a DPO is configured.
 
+## Privacy policy
+
+Your privacy notice must tell data subjects, clearly, the purpose, legal basis, duration and recipients of each processing, plus their rights (arts. 9 and 18). The records already hold all of that, so render the notice from them:
+
+```blade
+{{-- resources/views/privacy.blade.php, inside your layout --}}
+<x-lgpd-records::privacy-policy rights-url="{{ route('privacy.requests') }}" class="prose" />
+```
+
+It renders the controller, the DPO, one section per processing activity, the art. 18 rights and the right to complain to the ANPD. Each activity lists its purpose, legal basis, data (its `data_categories` plus its declared columns, flagged when sensitive), data subjects, recipients, international transfers and retention. The last-updated date comes from the activities, so the notice changes when your records change. Without `rights-url` it points readers to the DPO.
+
+Texts ship in English and Brazilian Portuguese and follow the app locale. Publish them (`--tag="lgpd-records-translations"`) or the view (`--tag="lgpd-records-views"`) to change the wording. The markup is plain semantic HTML with no styles, so your CSS (or `prose`) decides how it looks.
+
+> Generating the notice from the records keeps the two in sync. It still needs legal review, like the records themselves.
+
 ## Testing
 
 ```bash

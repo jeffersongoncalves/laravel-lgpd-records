@@ -14,6 +14,7 @@ class LgpdRecordsServiceProvider extends PackageServiceProvider
             ->name('lgpd-records')
             ->hasConfigFile()
             ->hasViews()
+            ->hasTranslations()
             ->hasMigrations(['create_lgpd_processing_activities_table'])
             ->hasCommand(RopaCommand::class);
     }
